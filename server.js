@@ -15,6 +15,12 @@ app.listen(port, () => {
 
 let twoots = [];
 
+app.use(express.static(path.join(__dirname, 'frontend/build/index.html')));
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+});
+
 app.get('/twoots', (req, res) => {
   axios
     .get('https://quotable.io/quotes?page=1&maxLength=140')
